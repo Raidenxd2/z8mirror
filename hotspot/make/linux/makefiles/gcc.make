@@ -149,6 +149,7 @@ CFLAGS += $(VM_PICFLAG)
 CFLAGS += -fno-rtti
 CFLAGS += -fno-exceptions
 CFLAGS += -D_REENTRANT
+CFLAGS += -lc
 ifeq ($(USE_CLANG),)
   CFLAGS += -fcheck-new
   # version 4 and above support fvisibility=hidden (matches jni_x86.h file)
