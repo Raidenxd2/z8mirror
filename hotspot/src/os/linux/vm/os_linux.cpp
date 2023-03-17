@@ -94,6 +94,8 @@
 # include <semaphore.h>
 # include <fcntl.h>
 # include <string.h>
+#include <unistd.h>
+#include <sys/syscall.h>   /* For SYS_xxx definitions */
 # include <sys/sysinfo.h>
 # include <sys/ipc.h>
 # include <sys/shm.h>
