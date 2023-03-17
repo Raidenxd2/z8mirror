@@ -1,0 +1,25 @@
+# Zulu build dependencies
+
+WITH_JFX=https://nexus.azulsystems.com/repository/zulu-binaries/zulu/jfx/zulu-jfx-sdk-build/301/
+
+WITH_CRS=https://nexus.azulsystems.com/repository/crs-binaries/promoted/agent/1.0.11
+
+WITH_OPENJSSE=false
+
+WITH_LEGACYJSSE=false
+
+WITH_FREETYPE=https://nexus.azulsystems.com/repository/zulu-binaries/zulu/freetype/61
+
+WITH_CACERTS=lastSuccessfulBuild
+
+WITH_DEVKIT_WIN=VS2017-15.9.40+20211020
+WITH_DEVKIT_LINUX_X64=gcc-7.3.0-OL6.4+1.3
+WITH_DEVKIT_LINUX_X86=gcc-4.9.2-OL6.4+1.3
+WITH_DEVKIT_LINUX_AARCH64=false
+PRODUCT_TOOLCHAIN_VERSION_LINUX_AARCH64=default
+
+BUILD_NODE_LINUX64=ubuntu-x86-docker-us-west-2:centos7
+BUILD_NODE_LINUX32=ubuntu-x86-docker-us-west-2:centos7
+BUILD_NODE_LINUX_MUSL_X64=ubuntu-x86-docker-us-west-2:alpine3.11
+BUILD_NODE_LINUX_MUSL_AARCH64=ubuntu-arm64-docker-us-west-2:alpine3.11.aarch64
+BUILD_NODE_LINUX_AARCH64=ubuntu-arm64-docker-us-west-2:centos7-devtoolsets.aarch64
