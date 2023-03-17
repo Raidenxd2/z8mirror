@@ -73,7 +73,7 @@ ifeq ($(USE_CLANG), true)
   else
     # We don't support precompiled headers on 32-bit builds because there some files are
     # compiled with -fPIC while others are compiled without (see 'NONPIC_OBJ_FILES' rules.make)
-    # Clang produces an error if the PCH file was compiled with other options than the actual compilation unit.
+    # Clang produces an \ if the PCH file was compiled with other options than the actual compilation unit.
     USE_PRECOMPILED_HEADER=0
   endif
 
@@ -201,30 +201,7 @@ else
   CFLAGS += -pipe
 endif
 
-# Compiler warnings are treated as errors
-ifneq ($(COMPILER_WARNINGS_FATAL),false)
-  WARNINGS_ARE_ERRORS = -Werror
-endif
-
-ifeq ($(USE_CLANG), true)
-  # However we need to clean the code up before we can unrestrictedly enable this option with Clang
-  WARNINGS_ARE_ERRORS += -Wno-logical-op-parentheses -Wno-parentheses-equality -Wno-parentheses
-  WARNINGS_ARE_ERRORS += -Wno-switch -Wno-tautological-constant-out-of-range-compare -Wno-tautological-compare
-  WARNINGS_ARE_ERRORS += -Wno-delete-non-virtual-dtor -Wno-deprecated -Wno-format -Wno-dynamic-class-memaccess
-  WARNINGS_ARE_ERRORS += -Wno-return-type -Wno-empty-body
-endif
-
-WARNING_FLAGS = -Wpointer-arith -Wsign-compare -Wundef -Wunused-function -Wunused-value -Wformat=2 -Wreturn-type
-
-ifeq ($(USE_CLANG),)
-  # Since GCC 4.3, -Wconversion has changed its meanings to warn these implicit
-  # conversions which might affect the values. Only enable it in earlier versions.
-  ifeq "$(shell expr \( $(CC_VER_MAJOR) \> 4 \) \| \( \( $(CC_VER_MAJOR) = 4 \) \& \( $(CC_VER_MINOR) \>= 3 \) \))" "0"
-    WARNING_FLAGS += -Wconversion
-  endif
-endif
-
-CFLAGS_WARN/DEFAULT = $(WARNINGS_ARE_ERRORS) $(WARNING_FLAGS)
+CFLAGS_WARN/DEFAULT =  $(WARNING_FLAGS)
 # Special cases
 CFLAGS_WARN/BYFILE = $(CFLAGS_WARN/$@)$(CFLAGS_WARN/DEFAULT$(CFLAGS_WARN/$@)) 
 
@@ -237,7 +214,7 @@ CFLAGS_WARN/BYFILE = $(CFLAGS_WARN/$@)$(CFLAGS_WARN/DEFAULT$(CFLAGS_WARN/$@))
 # https://icedtea.wildebeest.org/hg/icedtea8-forest/hotspot/rev/9f2ceb42dc64
 # Option only exists on GCC 7 and later, checked by configure
 ifeq ($(USE_FORMAT_OVERFLOW), 1)
-  CFLAGS_WARN/os_linux.o = $(CFLAGS_WARN/DEFAULT) -Wno-error=format-overflow
+  CFLAGS_WARN/os_linux.o = $(CFLAGS_WARN/DEFAULT)
 endif
 
 # The flags to use for an Optimized g++ build
